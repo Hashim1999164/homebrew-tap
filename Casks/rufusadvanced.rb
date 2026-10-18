@@ -1,6 +1,6 @@
 cask "rufusadvanced" do
-  version "1.2.0"
-  sha256 "18ca2bfdf8f91afcc96fed059e15c98581ec8de270eb5e4bfb51f0789b853fd9"
+  version "1.2.1"
+  sha256 "65d3319bad8ed856fe63f20f09160fab3f4e1e0b2c017f1797b7ae8fed9d2c2f"
 
   url "https://github.com/Hashim1999164/RufusAdvanced/releases/download/v#{version}/RufusAdvanced-#{version}-macOS.dmg"
   name "RufusAdvanced"
