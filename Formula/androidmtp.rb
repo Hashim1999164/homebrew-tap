@@ -13,7 +13,7 @@ class Androidmtp < Formula
   on_macos do
     resource "fuse-t" do
       url "https://github.com/macos-fuse-t/fuse-t/releases/download/1.2.9/fuse-t-macos-installer-1.2.9.pkg"
-      sha256 "29c23ed46023a14b1ef8a5b06335a1cb43a0e5ecf49bb51b08f47f86cf6f89bc"
+      sha256 "a1b893740ded8ea034f1acc522ded1144f4a567a1f416daef8c1441cf2662f7f"
     end
   end
 
