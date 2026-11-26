@@ -1,8 +1,8 @@
 class Androidmtp < Formula
-  desc "Mount Android MTP devices as Finder volumes on Apple Silicon"
+  desc "Plug-and-play Android MTP → Finder volumes on Apple Silicon"
   homepage "https://github.com/Hashim1999164/androidMTP"
-  url "https://github.com/Hashim1999164/androidMTP/archive/refs/tags/v0.1.1.tar.gz"
-  sha256 "29c23ed46023a14b1ef8a5b06335a1cb43a0e5ecf49bb51b08f47f86cf6f89bc"
+  url "https://github.com/Hashim1999164/androidMTP/archive/refs/tags/v0.2.0.tar.gz"
+  sha256 "81f93d162ac0886ea64943ca5c1196091d2d0ed1b0918551d008f3e88c266f33"
   license "MIT"
   head "https://github.com/Hashim1999164/androidMTP.git", branch: "main"
 
@@ -46,7 +46,6 @@ class Androidmtp < Formula
       ln_sf Dir["libfuse-t-*.dylib"].first, "libfuse-t.dylib"
     end
 
-    # Point the binary at Cellar lib instead of the ephemeral build path.
     dirty = `otool -l #{bin}/androidmtp`.lines.grep(/path /).map { |l| l[/path (.*) \(offset/, 1] }.compact
     dirty.each do |p|
       next if p.nil? || p.empty?
@@ -55,16 +54,26 @@ class Androidmtp < Formula
     system "install_name_tool", "-add_rpath", lib, bin/"androidmtp"
   end
 
+  def post_install
+    ohai "Enabling androidmtp plug-and-play"
+    system bin/"androidmtp", "enable"
+  rescue => e
+    opoo "Could not auto-enable agent (#{e}). Run: androidmtp enable"
+  end
+
   def caveats
     <<~EOS
-      Runtime also needs the FUSE-T helpers (go-nfsv4):
+      Plug-and-play is enabled after install.
+
+      Also install FUSE-T helpers if you have not:
 
         brew install --cask fuse-t
 
-      Then:
+      Then unlock phone → File Transfer / MTP → Finder opens automatically.
 
-        androidmtp doctor
-        androidmtp mount
+        androidmtp status
+        androidmtp disable
+        androidmtp enable
     EOS
   end
 
