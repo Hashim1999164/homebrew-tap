@@ -1,8 +1,8 @@
 class Androidmtp < Formula
   desc "Plug-and-play Android MTP → Finder volumes on Apple Silicon"
   homepage "https://github.com/Hashim1999164/androidMTP"
-  url "https://github.com/Hashim1999164/androidMTP/archive/refs/tags/v0.3.0.tar.gz"
-  sha256 "4ad1f07d146ad432f985c44814e066d305a49f5adc384e6c4740202a475dd934"
+  url "https://github.com/Hashim1999164/androidMTP/archive/refs/tags/v0.4.0.tar.gz"
+  sha256 "f22a186aa91cd3d9ca0e07fa2253b5e9caab06e8211e5a814f9ec6a0f86c2575"
   license "MIT"
   head "https://github.com/Hashim1999164/androidMTP.git", branch: "main"
 
@@ -52,13 +52,16 @@ class Androidmtp < Formula
       system "install_name_tool", "-delete_rpath", p, bin/"androidmtp"
     end
     system "install_name_tool", "-add_rpath", lib, bin/"androidmtp"
+    prefix.install "driver"
   end
 
   def post_install
+    ohai "Installing the Android MTP file system driver"
+    system "bash", prefix/"driver/build.sh"
     ohai "Enabling androidmtp plug-and-play"
     system bin/"androidmtp", "enable"
   rescue => e
-    opoo "Could not auto-enable agent (#{e}). Run: androidmtp enable"
+    opoo "Could not finish setup (#{e}). Run: bash driver/build.sh && androidmtp enable"
   end
 
   def caveats
@@ -68,7 +71,12 @@ class Androidmtp < Formula
         brew install --cask fuse-t
         androidmtp status
 
-      Unlock phone → File Transfer / MTP → volume appears (SMB, cached listings).
+      Unlock phone → File Transfer / MTP → the phone appears in Finder
+      under Locations, next to Macintosh HD.
+
+      First launch also installs the Android MTP file system driver.
+      Turn it on under System Settings → General → Login Items & Extensions
+      → File System Extensions.
     EOS
   end
 
