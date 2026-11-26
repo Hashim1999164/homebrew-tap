@@ -1,8 +1,8 @@
 class Androidmtp < Formula
   desc "Plug-and-play Android MTP → Finder volumes on Apple Silicon"
   homepage "https://github.com/Hashim1999164/androidMTP"
-  url "https://github.com/Hashim1999164/androidMTP/archive/refs/tags/v0.2.0.tar.gz"
-  sha256 "81f93d162ac0886ea64943ca5c1196091d2d0ed1b0918551d008f3e88c266f33"
+  url "https://github.com/Hashim1999164/androidMTP/archive/refs/tags/v0.3.0.tar.gz"
+  sha256 "4ad1f07d146ad432f985c44814e066d305a49f5adc384e6c4740202a475dd934"
   license "MIT"
   head "https://github.com/Hashim1999164/androidMTP.git", branch: "main"
 
@@ -65,15 +65,10 @@ class Androidmtp < Formula
     <<~EOS
       Plug-and-play is enabled after install.
 
-      Also install FUSE-T helpers if you have not:
-
         brew install --cask fuse-t
-
-      Then unlock phone → File Transfer / MTP → Finder opens automatically.
-
         androidmtp status
-        androidmtp disable
-        androidmtp enable
+
+      Unlock phone → File Transfer / MTP → volume appears (SMB, cached listings).
     EOS
   end
 
