@@ -20,10 +20,10 @@ class Androidmtp < Formula
   def install
     ENV["CGO_ENABLED"] = "1"
 
+    fuse_root = buildpath/"fuse-t-prefix"
     resource("fuse-t").stage do
       system "pkgutil", "--expand-full", Dir["*.pkg"].first, "expanded"
       payload = "expanded/fuse-t-core.pkg/Payload/Library/Application Support/fuse-t"
-      fuse_root = buildpath/"fuse-t-prefix"
       mkdir_p fuse_root/"include"
       mkdir_p fuse_root/"lib"
       mkdir_p fuse_root/"lib/pkgconfig"
@@ -40,13 +40,20 @@ class Androidmtp < Formula
         Name: fuse-t
         Description: FUSE-T
         Version: 1.2.9
-        Libs: -L${libdir} -Wl,-rpath,${libdir} -lfuse-t
+        Libs: -L${libdir} -lfuse-t
         Cflags: -I${includedir}
       EOS
-      ENV.prepend_path "PKG_CONFIG_PATH", fuse_root/"lib/pkgconfig"
-      ENV["CGO_CFLAGS"] = "-I#{fuse_root}/include/fuse"
-      ENV["CGO_LDFLAGS"] = "-L#{fuse_root}/lib -Wl,-rpath,#{fuse_root}/lib -lfuse-t"
     end
+
+    # Install fuse-t libs into the Cellar so @rpath resolves after install.
+    lib.install Dir["#{fuse_root}/lib/libfuse-t*"]
+    cd lib do
+      ln_sf Dir["libfuse-t-*.dylib"].first, "libfuse-t.dylib" unless File.exist?("libfuse-t.dylib")
+    end
+
+    ENV.prepend_path "PKG_CONFIG_PATH", fuse_root/"lib/pkgconfig"
+    ENV["CGO_CFLAGS"] = "-I#{fuse_root}/include/fuse"
+    ENV["CGO_LDFLAGS"] = "-L#{lib} -Wl,-rpath,#{lib} -lfuse-t"
 
     system "make", "build", "VERSION=#{version}"
     bin.install "bin/androidmtp"
@@ -54,7 +61,7 @@ class Androidmtp < Formula
 
   def caveats
     <<~EOS
-      Runtime requires FUSE-T (Finder volumes, no kext):
+      Runtime also needs the FUSE-T helpers (go-nfsv4):
 
         brew install --cask fuse-t
 
