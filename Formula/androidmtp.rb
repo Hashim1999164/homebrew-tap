@@ -9,11 +9,15 @@ class Androidmtp < Formula
   depends_on "go" => :build
   depends_on "pkg-config" => :build
   depends_on "libusb"
-  depends_on cask: "fuse-t"
 
   def install
+    fuse_lib = [
+      "/usr/local/lib/libfuse-t.dylib",
+      "#{Dir.home}/.fuse-t/usr/local/lib/libfuse-t.dylib",
+    ].find { |p| File.exist?(p) }
+    odie "Install FUSE-T first: brew install --cask fuse-t" unless fuse_lib
+
     ENV["CGO_ENABLED"] = "1"
-    # Prefer system fuse-t headers if present
     fuse_pc = [
       "/usr/local/lib/pkgconfig",
       "#{Dir.home}/.fuse-t/usr/local/lib/pkgconfig",
@@ -26,7 +30,7 @@ class Androidmtp < Formula
 
   def caveats
     <<~EOS
-      FUSE-T is required for Finder volumes (no kernel extension):
+      FUSE-T is required (kext-less Finder volumes):
 
         brew install --cask fuse-t
 
