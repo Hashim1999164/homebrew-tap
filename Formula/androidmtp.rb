@@ -9,6 +9,7 @@ class Androidmtp < Formula
   depends_on "go" => :build
   depends_on "pkg-config" => :build
   depends_on "libusb"
+  depends_on cask: "fuse-t"
 
   def install
     ENV["CGO_ENABLED"] = "1"
