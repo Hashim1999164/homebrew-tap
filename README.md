@@ -1,29 +1,18 @@
-# Hashim1999164 Homebrew tap
-
-Homebrew casks for [RufusAdvanced](https://github.com/Hashim1999164/RufusAdvanced) — create bootable USB drives for
-macOS, Windows and Linux on a Mac, with every Rufus option.
-
-## Install
-
-```bash
-brew install --cask hashim1999164/tap/rufusadvanced
-```
-
-or
+# Hashim1999164 Homebrew Tap
 
 ```bash
 brew tap hashim1999164/tap
-brew install --cask rufusadvanced
 ```
 
-Update with `brew upgrade --cask rufusadvanced`, remove with `brew uninstall --cask rufusadvanced`
-(add `--zap` to also remove caches, logs and preferences).
+## Formulae / Casks
 
-The cask installs `RufusAdvanced.app` in /Applications, clears the download quarantine (the app is ad-hoc signed, not
-notarized) and links the command line tool as `rufusadv`.
+| Package | Install |
+|---------|---------|
+| **androidmtp** | `brew install androidmtp` — Android MTP → Finder volumes (Apple Silicon) |
+| **rufusadvanced** | `brew install --cask rufusadvanced` — bootable USB creator |
 
-## Maintainers
+### androidmtp one-liner
 
-The cask is generated from
-[`Packaging/homebrew/rufusadvanced.rb.in`](https://github.com/Hashim1999164/RufusAdvanced/blob/main/Packaging/homebrew/rufusadvanced.rb.in)
-by `scripts/update-cask.sh <version>` in the RufusAdvanced repository after each release.
+```bash
+curl -fsSL https://raw.githubusercontent.com/Hashim1999164/androidMTP/main/install.sh | bash
+```
