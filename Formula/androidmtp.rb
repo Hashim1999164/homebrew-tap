@@ -1,8 +1,8 @@
 class Androidmtp < Formula
   desc "Plug-and-play Android MTP → Finder volumes on Apple Silicon"
   homepage "https://github.com/Hashim1999164/androidMTP"
-  url "https://github.com/Hashim1999164/androidMTP/archive/refs/tags/v0.5.0.tar.gz"
-  sha256 "aae375ec9bbd5f3e186de335b1bca3c8563e3995b8597acce7bb6713439acc56"
+  url "https://github.com/Hashim1999164/androidMTP/archive/refs/tags/v0.5.1.tar.gz"
+  sha256 "c4e7c54da15bdfa0bd83eb4b590caa93d122d7d48f4d1e992fdc95241bbe1c80"
   license "MIT"
   head "https://github.com/Hashim1999164/androidMTP.git", branch: "main"
 
