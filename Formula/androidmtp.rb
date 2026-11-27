@@ -1,8 +1,8 @@
 class Androidmtp < Formula
-  desc "Android file transfer for Mac: Finder and the Desktop"
+  desc "Android File Transfer for Mac: MTP in Finder and on the Desktop"
   homepage "https://github.com/Hashim1999164/androidMTP"
-  url "https://github.com/Hashim1999164/androidMTP/archive/refs/tags/v0.6.1.tar.gz"
-  sha256 "510622d7d12859341134213b286c8221f272e92868948f177009de331b8e7100"
+  url "https://github.com/Hashim1999164/androidMTP/archive/refs/tags/v0.6.2.tar.gz"
+  sha256 "c4b201ff11d34099a52519aa9de95b72d5d66398daed34a314896b4271758955"
   license "MIT"
   head "https://github.com/Hashim1999164/androidMTP.git", branch: "main"
 
@@ -33,7 +33,7 @@ class Androidmtp < Formula
         androidmtp status
 
       Unlock any Android phone → File Transfer / MTP → the phone appears
-      in Finder and on the Desktop.
+      in Finder and on the Desktop. Unplug the cable and both go away.
 
       Turn on Android MTP under System Settings → General →
       Login Items & Extensions → File System Extensions.
