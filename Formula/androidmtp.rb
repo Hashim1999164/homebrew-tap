@@ -1,8 +1,8 @@
 class Androidmtp < Formula
-  desc "Plug-and-play Android MTP → Finder volumes on Apple Silicon"
+  desc "Android file transfer for Mac: Finder and the Desktop"
   homepage "https://github.com/Hashim1999164/androidMTP"
-  url "https://github.com/Hashim1999164/androidMTP/archive/refs/tags/v0.6.0.tar.gz"
-  sha256 "12eb7f5513492a0ff1d8a2cade50911ba68590edee96315049f83014a868b903"
+  url "https://github.com/Hashim1999164/androidMTP/archive/refs/tags/v0.6.1.tar.gz"
+  sha256 "510622d7d12859341134213b286c8221f272e92868948f177009de331b8e7100"
   license "MIT"
   head "https://github.com/Hashim1999164/androidMTP.git", branch: "main"
 
@@ -33,7 +33,7 @@ class Androidmtp < Formula
         androidmtp status
 
       Unlock any Android phone → File Transfer / MTP → the phone appears
-      in Finder under Locations, next to Macintosh HD.
+      in Finder and on the Desktop.
 
       Turn on Android MTP under System Settings → General →
       Login Items & Extensions → File System Extensions.
